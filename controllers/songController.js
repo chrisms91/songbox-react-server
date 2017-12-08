@@ -24,7 +24,7 @@ module.exports = function (app) {
   app.get('/api/recent', function (req, res) {
     Customers.findOne()
       .sort({ field: 'asc', _id: 1 }).limit(1)
-      .then(data => res.send(data))
+      .then(data => res.json(data))
       .catch(err => res.send(err))
   })
 
@@ -32,7 +32,7 @@ module.exports = function (app) {
   app.get("/api/saved", function (req, res) {
     
     Customers
-        .find({}).sort({date:-1})
+        .find({})
         .exec(function (err, doc) {
     
             if (err) {
