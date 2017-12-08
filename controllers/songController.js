@@ -1,11 +1,13 @@
 var Customers = require('../client/models/Customers')
 var Owners = require('../client/models/Owners')
+var Playing = require('../client/models/Playing')
 var request = require('request')
 var songData = require('../data/data.json')
 
 const YouTube_key = 'AIzaSyDwgRsgz8Fcl4OLOIsR3YEl6-ZUhbdkBgA'
 
 module.exports = function (app) {
+
   app.post('/api/search/:song?', function (req, res) {
   //  console.log('this is process.env.YouTube_key  '+process.env.YouTube_key)
    if (req.params.song === undefined) {
@@ -46,7 +48,7 @@ module.exports = function (app) {
   app.post('/api/new', function (req, res) {
     Customers.create(req.body)
     .then(data => res.send(data))
-    .catch(err => console.log(err))
+    .catch(err => res.status(422).json(err))
   })
 
   app.get('/api/delete', function (req, res) {
