@@ -25,7 +25,7 @@ module.exports = function (app) {
     Customers.findOne()
       .sort({ field: 'asc', _id: 1 }).limit(1)
       .then(data => res.send(data))
-      .catch(err => console.log(err))
+      .catch(err => res.send(err))
   })
 
 
@@ -45,7 +45,7 @@ module.exports = function (app) {
 
   app.post('/api/new', function (req, res) {
     Customers.create(req.body)
-    .then(res => console.log(res))
+    .then(data => res.send(data))
     .catch(err => console.log(err))
   })
 
